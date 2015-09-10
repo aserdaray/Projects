@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition template="../template/admin/adminLayout.xhtml">
+            <ui:define name="content">
+                <div class="wrapper">
+                    <ui:insert>
+                        <ui:include src="../modules/admin_left_nav.xhtml" />
+                    </ui:insert>
+                    <!-- Content -->
+                    <div class="content">
+                        <div class="title"><h5>#{msg['admin.faq.addFaq']}</h5></div>
+                        <p:growl id="msg" showDetail="true"/>  
+                        <p:messages id="messages" showDetail="true"/>
+                        <h:form id="valid" class="mainForm">
+                            <fieldset>
+                                <div class="widget">    
+                                    <div class="head"><h5 class="iLocked2">#{msg['admin.faq.addFaq']}</h5></div>
+                                    <div class="rowElem noborder">
+                                        <label>#{msg['admin.faq.category']}</label>
+                                        <div class="formRight">
+                                            <h:selectOneMenu value="#{FaqBean.idCategory}" style="width: 150px;">
+                                                <f:selectItems value="#{FaqCategoriesBean.faqCategoriesList}" var="cat"  itemValue="#{cat.idFAQCategories}" itemLabel="#{cat.categoryName}" /> 
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="fix"></div>
+                                    </div>
+                                    <div class="rowElem noborder">
+                                        <label>#{msg['admin.faq.question']}</label>
+                                        <div class="formRight">
+                                            <h:inputText id="categoryName" value="#{FaqBean.question}" required="true" ></h:inputText>
+                                        </div>
+                                        <div class="fix"></div>
+                                    </div>
+                                    <div class="rowElem">
+                                        <label>#{msg['admin.faq.answer']}</label>
+                                        <div class="formRight">
+                                            <h:inputText id="categoryDescription"   value="#{FaqBean.answer}" required="true" ></h:inputText>
+                                        </div><div class="fix">
+                                        </div>
+                                    </div>
+                                    <h:commandButton value="#{msg['admin.save']}" class="blueBtn submitForm" action="#{FaqBean.add()}">
+                                        <f:ajax execute="@form" render=":messages :msg" />
+                                    </h:commandButton>
+                                    <div class="fix"></div>
+                                </div>
+                            </fieldset>
+                        </h:form>   
+                    </div>
+                    <div class="fix"></div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

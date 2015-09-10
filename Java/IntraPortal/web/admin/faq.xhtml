@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition template="../template/admin/adminLayout.xhtml">
+            <ui:define name="content">
+                <div class="wrapper">
+                    <ui:insert>
+                        <ui:include src="../modules/admin_left_nav.xhtml" />
+                    </ui:insert>
+                    <!-- Content -->
+                    <div class="content">
+                        <div class="title"><h5>#{msg['admin.menu.faqList']}</h5></div>
+                        <a href="faq_add.xhtml" title="" class="btnIconLeft mr10 mt5">
+                            <img src="../resources/admin/images/icons/dark/add.png" alt="" class="icon" />
+                            <span>#{msg['admin.faq.addFaq']}</span>
+                        </a>
+                        <p:growl id="msg" showDetail="true"/>  
+                        <p:messages id="messages" showDetail="true"/>
+                        <div class="table">
+                            <div class="head"><h5 class="iFrames">#{msg['admin.menu.faqList']}</h5></div>
+                            <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>#{msg['admin.faq.categoryName']}</th>
+                                        <th>#{msg['admin.faq.question']}</th>
+                                        <th>#{msg['admin.operations']}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ui:repeat var="o" value="#{FaqBean.faqList}" varStatus="status">
+                                        <tr class="gradeA">
+                                            <h:form >
+                                                <td  class="center">#{o.idFAQ}</td>
+                                                <td>#{o.categoryName}</td>
+                                                <td>#{o.question}</td>
+                                                <td class="center">
+                                                    <h:outputLink value="faq_edit.xhtml" class="btn14 mr5" >
+                                                        <img src="../resources/admin/images/icons/dark/pencil.png" alt="" />
+                                                        <f:param name="edit" value="#{o.idFAQ}" />
+                                                    </h:outputLink>
+                                                    <h:commandLink styleClass="basicBtn mr10 ml10 btn14 mr5 topDir" title="Kategori Sil" action="#{FaqBean.delete(o)}">
+                                                        <f:ajax execute="@form" render=":messages :msg" />
+                                                        <h:graphicImage value="../resources/admin/images/icons/dark/trash.png" />
+                                                    </h:commandLink>
+                                                </td>
+                                            </h:form>
+                                        </tr>
+                                    </ui:repeat>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="fix"></div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

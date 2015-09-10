@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:body>
+        <ui:composition template="template/common/commonLayout.xhtml">
+            <ui:define name="content">
+
+                <div id="content"><span class="separator"></span>
+                    <div id="main-heading">
+                        <div class="columns">
+                            <div class="two-third">
+                                <h2>Sık Sorulan Sorular</h2>
+                                <ul id="breadcrumb">
+                                    <li><a href="#">Home</a> &raquo;
+                                        <ul>
+                                            <li><a href="#">Pages</a> &raquo;
+                                                <ul>
+                                                    <li><a href="#">Left sidebar</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>							
+                                <!-- breadcrumb - end -->									
+                            </div>
+                            <div class="third">
+                                <ui:insert>
+                                    <ui:include src="/modules/addThis.xhtml" />
+                                </ui:insert>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="separator"></span><!-- main-heading - end -->		 
+                    <div>
+
+
+                        <ui:repeat var="col" value="#{FaqCategoriesBean.faqCategoriesList}" >
+
+                            <h2> #{col.categoryName}</h2>
+
+                            <ui:repeat var="row" value="#{col.faqList}" >
+
+                                <a href="#" class="toggle" style="color: #b20036;   font-size: 1em; ">#{row.question}</a>
+                                <p style="background: #fff; border: 1px solid #cecece; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; font-size: 9pt; line-height: 12pt; padding: 20px 35px 20px 20px;">#{row.answer}</p>
+                                <span class="separator"></span>
+
+                            </ui:repeat>
+
+                        </ui:repeat>
+
+                    </div>
+
+                    <!-- main left - end -->
+
+                    <!-- sidebar right - end -->
+                </div>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
